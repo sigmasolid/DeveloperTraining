@@ -1,6 +1,4 @@
-﻿using AutoFixture;
-using AutoFixture.AutoNSubstitute;
-using NSubstitute;
+﻿using NSubstitute;
 using Workshop4.Autofixture.Domain.Interfaces;
 using Workshop4.Autofixture.Domain.Models;
 using Workshop4.Autofixture.Domain.Services;
@@ -13,9 +11,8 @@ public class ProductServiceShould
     public void GetFinalPrice_ReturnsExpected_WhenProductExists()
     {
         // Arrange
-        var fixture = new Fixture().Customize(new AutoNSubstituteCustomization());
-        var product = fixture.Build<Product>().With(p => p.Price, 100m).With(p => p.DiscountPercent, 10m).Create();
-        var repo = fixture.Freeze<IProductRepository>();
+        var product = new Product { Id = Guid.NewGuid(), Price = 100m, DiscountPercent = 10m };
+        var repo = Substitute.For<IProductRepository>();
         repo.GetById(product.Id).Returns(product);
         var discount = new DiscountService();
         var sut = new ProductService(repo, discount);
@@ -31,8 +28,7 @@ public class ProductServiceShould
     public void GetFinalPrice_ThrowsArgumentException_WhenProductNotFound()
     {
         // Arrange
-        var fixture = new Fixture().Customize(new AutoNSubstituteCustomization());
-        var repo = fixture.Freeze<IProductRepository>();
+        var repo = Substitute.For<IProductRepository>();
         var discount = new DiscountService();
         var sut = new ProductService(repo, discount);
 
