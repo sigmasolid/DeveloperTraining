@@ -4,6 +4,7 @@ using Workshop4.AutoFixture.Domain.Interfaces;
 using Workshop4.AutoFixture.Domain.Models;
 using Workshop4.AutoFixture.Domain.Services;
 using Workshop4.AutoFixture.Domain.Tests.Fixtures;
+using Workshop4.Autofixture.Domain.ValueObjects;
 
 namespace Workshop4.AutoFixture.Domain.Tests;
 
@@ -13,7 +14,7 @@ public class ProductServiceShould
     public void GetCorrectFinalPrice_When_ProductExists()
     {
         // Arrange
-        var product = new Product { Id = Guid.NewGuid(), Price = 100m, DiscountPercent = 10m };
+        var product = new Product { Id = new ProductId(Guid.NewGuid().ToString()), Price = 100m, DiscountPercent = 10m };
         var repo = Substitute.For<IProductRepository>();
         repo.GetById(product.Id).Returns(product);
 
@@ -67,7 +68,7 @@ public class ProductServiceShould
         var unused2 = Substitute.For<IAnotherUnusedInterface>();
         var sut = new ProductService(repo, discount, unused1, unused2);
 
-        var id = Guid.NewGuid();
+        var id = new ProductId(Guid.NewGuid().ToString());
         repo.GetById(id).Returns((Product?)null);
 
         // Act & Assert
@@ -83,10 +84,10 @@ public class ProductServiceShould
         ProductService sut)
     {
         // Arrange
-        productRepository.GetById(Arg.Any<Guid>()).Returns((Product?)null);
+        productRepository.GetById(Arg.Any<ProductId>()).Returns((Product?)null);
         
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => sut.GetFinalPrice(Guid.NewGuid()));
+        Assert.Throws<ArgumentException>(() => sut.GetFinalPrice(Arg.Any<ProductId>()));
     }
 
     #endregion

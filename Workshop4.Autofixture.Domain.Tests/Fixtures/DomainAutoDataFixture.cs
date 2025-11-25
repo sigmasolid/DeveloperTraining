@@ -9,8 +9,10 @@ public class DomainAutoDataFixture : AutoDataAttribute
     public DomainAutoDataFixture(): base(() =>
     {
         var fixture = new Fixture();
+        // Instruct the fixture to use NSubstitute for creating substitutes for interfaces and abstract classes
         fixture.Customize(new AutoNSubstituteCustomization());
-        // Add any other customizations here
+        // Apply domain-specific customizations
+        fixture.Customize(new DomainCustomization());
         return fixture;
     })
     {

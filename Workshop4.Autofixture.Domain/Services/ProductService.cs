@@ -1,5 +1,6 @@
 using Workshop4.AutoFixture.Domain.Interfaces;
 using Workshop4.AutoFixture.Domain.Models;
+using Workshop4.Autofixture.Domain.ValueObjects;
 
 namespace Workshop4.AutoFixture.Domain.Services;
 
@@ -18,7 +19,7 @@ public class ProductService
         _anotherUnusedInterface = unused2 ?? throw new ArgumentNullException(nameof(unused2));
     }
 
-    public decimal GetFinalPrice(Guid productId)
+    public decimal GetFinalPrice(ProductId productId)
     {
         var product = _repo.GetById(productId);
         if (product is null) throw new ArgumentException("Product not found", nameof(productId));
