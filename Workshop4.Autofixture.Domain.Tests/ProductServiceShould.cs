@@ -1,4 +1,7 @@
-﻿using AutoFixture.Xunit2;
+﻿using AutoFixture;
+using AutoFixture.AutoNSubstitute;
+using AutoFixture.Xunit2;
+using Xunit;
 using NSubstitute;
 using Workshop4.AutoFixture.Domain.Interfaces;
 using Workshop4.AutoFixture.Domain.Models;
@@ -33,12 +36,45 @@ public class ProductServiceShould
         // Assert
         Assert.Equal(90m, result);
     }
+    
+    #region Autofixture Style 
 
-    #region Autofixture Style
+    [Fact]
+    public void GetCorrectFinalPrice_When_ProductExists_AutoFixtureStyle()
+    {
+        // Arrange
+        var fixture = new Fixture().Customize(new AutoNSubstituteCustomization());
+
+        // Ensure AutoFixture can create valid ProductId values (ProductId expects a GUID string)
+        fixture.Register(() => new ProductId(Guid.NewGuid().ToString()));
+
+        var product = fixture.Create<Product>();
+        var discountedPrice = fixture.Create<decimal>();
+
+        // Freeze (and obtain) the substitute instances so we can configure them
+        var discountService = fixture.Freeze<IDiscountService>();
+        discountService.Calculate(product.Price, product.DiscountPercent).Returns(discountedPrice);
+
+        var productRepository = fixture.Freeze<IProductRepository>();
+        productRepository.GetById(product.Id).Returns(product);
+
+        // Create sut with dependencies provided by the fixture (they will be substitutes)
+        var sut = fixture.Create<ProductService>();
+        
+        // Act
+        var result = sut.GetFinalPrice(product.Id);
+        
+        // Assert
+        Assert.Equal(discountedPrice, result);
+    }
+
+    #endregion
+
+    #region Autofixture Style With AutoDataAttribute
 
     [Theory]
     [DomainAutoDataFixture]
-    public void GetCorrectFinalPrice_When_ProductExists_AutofixtureStyle(
+    public void GetCorrectFinalPrice_When_ProductExists_AutoFixtureStyleWithDataAttribute(
         Product product,
         [Frozen] IDiscountService discountService,
         [Frozen] IProductRepository productRepository,
@@ -75,7 +111,7 @@ public class ProductServiceShould
         Assert.Throws<ArgumentException>(() => sut.GetFinalPrice(id));
     }
 
-    #region Autofixture Style
+    #region AutoFixture Style
 
     [Theory]
     [DomainAutoDataFixture]
