@@ -2,7 +2,7 @@
 using AutoFixture.AutoNSubstitute;
 using AutoFixture.Xunit2;
 
-namespace Workshop4.Autofixture.Domain.Tests.Fixtures;
+namespace Workshop4.AutoFixture.Domain.Tests.Fixtures;
 
 public class DomainAutoDataFixture : AutoDataAttribute
 {

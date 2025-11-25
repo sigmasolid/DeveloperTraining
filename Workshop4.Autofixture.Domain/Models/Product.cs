@@ -1,4 +1,4 @@
-namespace Workshop4.Autofixture.Domain.Models;
+namespace Workshop4.AutoFixture.Domain.Models;
 
 public class Product
 {

@@ -1,6 +1,6 @@
-using Workshop4.Autofixture.Domain.Interfaces;
+using Workshop4.AutoFixture.Domain.Interfaces;
 
-namespace Workshop4.Autofixture.Domain.Services;
+namespace Workshop4.AutoFixture.Domain.Services;
 
 public class DiscountService : IDiscountService
 {

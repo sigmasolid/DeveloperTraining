@@ -1,11 +1,11 @@
 ﻿using AutoFixture.Xunit2;
 using NSubstitute;
-using Workshop4.Autofixture.Domain.Interfaces;
-using Workshop4.Autofixture.Domain.Models;
-using Workshop4.Autofixture.Domain.Services;
-using Workshop4.Autofixture.Domain.Tests.Fixtures;
+using Workshop4.AutoFixture.Domain.Interfaces;
+using Workshop4.AutoFixture.Domain.Models;
+using Workshop4.AutoFixture.Domain.Services;
+using Workshop4.AutoFixture.Domain.Tests.Fixtures;
 
-namespace Workshop4.Autofixture.Domain.Tests;
+namespace Workshop4.AutoFixture.Domain.Tests;
 
 public class ProductServiceShould
 {
@@ -33,6 +33,8 @@ public class ProductServiceShould
         Assert.Equal(90m, result);
     }
 
+    #region Autofixture Style
+
     [Theory]
     [DomainAutoDataFixture]
     public void GetCorrectFinalPrice_When_ProductExists_AutofixtureStyle(
@@ -53,6 +55,8 @@ public class ProductServiceShould
         Assert.Equal(discountedPrice, result);
     }
 
+    #endregion
+    
     [Fact]
     public void ThrowArgumentException_WhenProductNotFound()
     {
@@ -69,4 +73,21 @@ public class ProductServiceShould
         // Act & Assert
         Assert.Throws<ArgumentException>(() => sut.GetFinalPrice(id));
     }
+
+    #region Autofixture Style
+
+    [Theory]
+    [DomainAutoDataFixture]
+    public void ThrowArgumentException_WhenProductDoesNotExist(
+        [Frozen] IProductRepository productRepository,
+        ProductService sut)
+    {
+        // Arrange
+        productRepository.GetById(Arg.Any<Guid>()).Returns((Product?)null);
+        
+        // Act & Assert
+        Assert.Throws<ArgumentException>(() => sut.GetFinalPrice(Guid.NewGuid()));
+    }
+
+    #endregion
 }

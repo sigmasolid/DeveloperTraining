@@ -1,4 +1,4 @@
-namespace Workshop4.Autofixture.Domain.Interfaces;
+namespace Workshop4.AutoFixture.Domain.Interfaces;
 
 public interface IDiscountService
 {

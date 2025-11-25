@@ -1,6 +1,6 @@
-using Workshop4.Autofixture.Domain.Models;
+using Workshop4.AutoFixture.Domain.Models;
 
-namespace Workshop4.Autofixture.Domain.Interfaces;
+namespace Workshop4.AutoFixture.Domain.Interfaces;
 
 public interface IProductRepository
 {
