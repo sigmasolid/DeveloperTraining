@@ -1,6 +1,8 @@
+using Workshop4.Autofixture.Domain.Interfaces;
+
 namespace Workshop4.Autofixture.Domain.Services;
 
-public class DiscountService
+public class DiscountService : IDiscountService
 {
     /// <summary>
     /// Calculate final price after applying discount percent.
@@ -17,4 +19,3 @@ public class DiscountService
         return price - discount;
     }
 }
-
