@@ -2,7 +2,7 @@ namespace Workshop3.EFCore.Domain;
 
 public class Genre
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public IEnumerable<Artist> Bands { get; set; }
+    public required int Id { get; init; }
+    public required string Name { get; init; }
+    public IEnumerable<Artist> Bands { get; set; } = new List<Artist>();
 }

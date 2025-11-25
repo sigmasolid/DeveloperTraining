@@ -43,18 +43,21 @@ public class ResetDataController : ControllerBase
         {
             new Album()
             {
+                Id =1,
                 Title = "Master of Puppets",
                 ReleaseDate = new DateTime(1986, 3, 3),
                 Artist = artist
             },
             new Album()
             {
+                Id =2,
                 Title = "Ride the Lightning",
                 ReleaseDate = new DateTime(1984, 7, 27),
                 Artist = artist
             },
             new Album()
             {
+                Id =3,
                 Title = "Kill 'Em All",
                 ReleaseDate = new DateTime(1983, 7, 25),
                 Artist = artist
@@ -66,10 +69,10 @@ public class ResetDataController : ControllerBase
     {
         return new[]
         {
-            new Artist() { Name = "Metallica" },
-            new Artist() { Name = "Megadeth" },
-            new Artist() { Name = "Slayer" },
-            new Artist() { Name = "Anthrax" }
+            new Artist() { Id = 1, Name = "Metallica" },
+            new Artist() { Id = 2, Name = "Megadeth" },
+            new Artist() { Id = 3, Name = "Slayer" },
+            new Artist() { Id = 4, Name = "Anthrax" }
         };
     }
 
