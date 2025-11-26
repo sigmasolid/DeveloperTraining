@@ -3,23 +3,16 @@ using Workshop4.Autofixture.Domain.ValueObjects;
 
 namespace Workshop4.AutoFixture.Domain.Services;
 
-public class ProductService
+public class ProductService(
+    IProductRepository repo,
+    IDiscountService discountService,
+    IUnusedInterface unused1,
+    IAnotherUnusedInterface unused2)
 {
-    private readonly IProductRepository _repo;
-    private readonly IDiscountService _discountService;
-    private readonly IUnusedInterface _unusedInterface;
-    private readonly IAnotherUnusedInterface _anotherUnusedInterface;
-
-    public ProductService(IProductRepository repo,
-        IDiscountService discountService,
-        IUnusedInterface unused1,
-        IAnotherUnusedInterface unused2)
-    {
-        _repo = repo ?? throw new ArgumentNullException(nameof(repo));
-        _discountService = discountService ?? throw new ArgumentNullException(nameof(discountService));
-        _unusedInterface = unused1 ?? throw new ArgumentNullException(nameof(unused1));
-        _anotherUnusedInterface = unused2 ?? throw new ArgumentNullException(nameof(unused2));
-    }
+    private readonly IProductRepository _repo = repo ?? throw new ArgumentNullException(nameof(repo));
+    private readonly IDiscountService _discountService = discountService ?? throw new ArgumentNullException(nameof(discountService));
+    private readonly IUnusedInterface _unusedInterface = unused1 ?? throw new ArgumentNullException(nameof(unused1));
+    private readonly IAnotherUnusedInterface _anotherUnusedInterface = unused2 ?? throw new ArgumentNullException(nameof(unused2));
 
     public decimal GetFinalPrice(ProductId productId)
     {
