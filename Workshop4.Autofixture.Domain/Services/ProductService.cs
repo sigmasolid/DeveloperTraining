@@ -10,7 +10,10 @@ public class ProductService
     private readonly IUnusedInterface _unusedInterface;
     private readonly IAnotherUnusedInterface _anotherUnusedInterface;
 
-    public ProductService(IProductRepository repo, IDiscountService discountService, IUnusedInterface unused1, IAnotherUnusedInterface unused2)
+    public ProductService(IProductRepository repo,
+        IDiscountService discountService,
+        IUnusedInterface unused1,
+        IAnotherUnusedInterface unused2)
     {
         _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         _discountService = discountService ?? throw new ArgumentNullException(nameof(discountService));

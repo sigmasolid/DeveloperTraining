@@ -42,6 +42,7 @@ public class ProductServiceShould
     public void GetCorrectFinalPrice_When_ProductExists_AutoFixtureStyle()
     {
         // Arrange
+        // Create a fixture that can create NSubstitute substitutes
         var fixture = new Fixture().Customize(new AutoNSubstituteCustomization());
 
         // Ensure AutoFixture can create valid ProductId values (ProductId expects a GUID string)
@@ -50,14 +51,14 @@ public class ProductServiceShould
         var product = fixture.Create<Product>();
         var discountedPrice = fixture.Create<decimal>();
 
-        // Freeze (and obtain) the substitute instances so we can configure them
+        // Freeze (aka. create a singleton that the fixture uses) the substitute instance so we can configure them
         var discountService = fixture.Freeze<IDiscountService>();
         discountService.Calculate(product.Price, product.DiscountPercent).Returns(discountedPrice);
 
         var productRepository = fixture.Freeze<IProductRepository>();
         productRepository.GetById(product.Id).Returns(product);
 
-        // Create sut with dependencies provided by the fixture (they will be substitutes)
+        // Create sut with dependencies provided by the fixture (using the "singleton" substitutes above)
         var sut = fixture.Create<ProductService>();
         
         // Act
