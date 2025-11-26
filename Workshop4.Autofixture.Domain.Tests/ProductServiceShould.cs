@@ -1,7 +1,6 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using AutoFixture.Xunit2;
-using Xunit;
 using NSubstitute;
 using Workshop4.AutoFixture.Domain.Interfaces;
 using Workshop4.AutoFixture.Domain.Models;

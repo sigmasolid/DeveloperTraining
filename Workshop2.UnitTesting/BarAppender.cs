@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace Workshop2.UnitTesting;
+﻿namespace Workshop2.UnitTesting;
 
 public class BarAppender
 {

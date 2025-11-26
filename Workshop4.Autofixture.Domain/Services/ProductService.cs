@@ -1,5 +1,4 @@
 using Workshop4.AutoFixture.Domain.Interfaces;
-using Workshop4.AutoFixture.Domain.Models;
 using Workshop4.Autofixture.Domain.ValueObjects;
 
 namespace Workshop4.AutoFixture.Domain.Services;
