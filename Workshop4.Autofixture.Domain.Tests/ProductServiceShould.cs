@@ -110,7 +110,7 @@ public class ProductServiceShould
         Assert.Throws<ArgumentException>(() => sut.GetFinalPrice(id));
     }
 
-    #region AutoFixture Style
+    #region AutoFixture Style With AutoDataAttribute
 
     [Theory]
     [DomainAutoDataFixture]
