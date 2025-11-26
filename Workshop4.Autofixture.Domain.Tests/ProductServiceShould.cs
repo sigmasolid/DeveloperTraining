@@ -95,7 +95,7 @@ public class ProductServiceShould
     #endregion
     
     [Fact]
-    public void ThrowArgumentException_WhenProductNotFound()
+    public void ThrowArgumentException_WhenProductIsNotFound()
     {
         // Arrange
         var repo = Substitute.For<IProductRepository>();
