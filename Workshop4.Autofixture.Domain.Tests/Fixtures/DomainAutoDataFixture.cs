@@ -14,8 +14,5 @@ public class DomainAutoDataFixture : AutoDataAttribute
         // Apply domain-specific customizations
         fixture.Customize(new DomainCustomization());
         return fixture;
-    })
-    {
-        
-    }    
+    }) { }    
 }
